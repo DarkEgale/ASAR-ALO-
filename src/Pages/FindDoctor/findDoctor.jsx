@@ -27,14 +27,14 @@ const FindDoctor = () => {
         // Fetch doctors from API
         const fetchDoctors = async () => {
             try {
-                const res = await fetch('http://localhost:5001/api/auth/doctors/all');
+                const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/all');
                 const data = await res.json();
                 if (res.ok) {
                     setDoctors(data.Doctors || []);
                     setFilteredDoctors(data.Doctors || []);
                 } else {
                     console.error('Failed to fetch doctors');
-                    // Fallback to dummy data
+                    
                     const tempDoctors = [
                         { _id: 1, name: "Dr. Shimul", specialization: "Cardiology", fee: 1000 },
                         { _id: 2, name: "Dr. Ariful", specialization: "Neurology", fee: 1200 },

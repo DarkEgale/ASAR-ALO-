@@ -1,0 +1,66 @@
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { HeartPulse, Menu, X, LogIn } from 'lucide-react';
+import './Navbar.scss';
+
+const Navbar = () => {
+    const [scrolled, setScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
+
+    // Scroll effect logic
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) setScrolled(true);
+            else setScrolled(false);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    return (
+        <nav className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
+            <div className="navbar-inner">
+                {/* Brand Logo */}
+                <div className="nav-logo" onClick={() => navigate('/')}>
+                    <div className="logo-box">
+                        <HeartPulse size={24} />
+                    </div>
+                    <h2>HealthSync</h2>
+                </div>
+
+                {/* Desktop Links */}
+                <div className="nav-links">
+                    <NavLink to="/" className="link">Home</NavLink>
+                    <NavLink to="/find-doctors" className="link">Find Doctors</NavLink>
+                    <NavLink to="/services" className="link">Services</NavLink>
+                    <NavLink to="/contact" className="link">Contact</NavLink>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="nav-actions">
+                    <button className="btn-login secondary" onClick={() => navigate('/doctor-login')}>
+                        Doctor Portal
+                    </button>
+                    <button className="btn-login primary" onClick={() => navigate('/login')}>
+                        Sign In
+                    </button>
+                </div>
+
+                {/* Mobile Menu Icon */}
+                <div className="mobile-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                </div>
+            </div>
+
+            {/* Mobile Dropdown (Optional logic) */}
+            {isMobileMenuOpen && (
+                <div className="mobile-menu-overlay">
+                    {/* মোবাইল মেনুর কন্টেন্ট এখানে হবে */}
+                </div>
+            )}
+        </nav>
+    );
+};
+
+export default Navbar;

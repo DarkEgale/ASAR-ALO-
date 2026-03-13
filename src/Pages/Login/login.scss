@@ -1,0 +1,154 @@
+@import url('../../index.scss');
+
+.login-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color); 
+    font-family: 'Inter', sans-serif;
+    position: relative;
+
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        background: var(--card-bg); 
+        padding: 40px;
+        border-radius: var(--radius-lg); 
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+        z-index: 2;
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+
+            .logo-icon {
+                background: var(--primary-light);
+                color: var(--primary-color);
+                width: 50px;
+                height: 50px;
+                border-radius: var(--radius-md);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto 15px;
+            }
+
+            h2 {
+                font-size: 22px;
+                color: var(--text-main);
+                font-weight: 700;
+                margin: 0;
+            }
+
+            p {
+                font-size: 14px;
+                color: var(--text-muted);
+                margin-top: 5px;
+            }
+        }
+
+        .login-form {
+            .input-group {
+                margin-bottom: 20px;
+
+                label {
+                    display: block;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: var(--text-main);
+                    margin-bottom: 8px;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 12px 15px;
+                    border: 1px solid var(--border-color);
+                    border-radius: var(--radius-md);
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+
+                    &:focus {
+                        border-color: var(--primary-color);
+                        box-shadow: 0 0 0 3px var(--primary-light);
+                        outline: none;
+                    }
+                }
+            }
+
+            .error-box {
+                background: rgba(239, 68, 68, 0.1);
+                color: var(--error);
+                padding: 10px;
+                border-radius: var(--radius-md);
+                font-size: 13px;
+                margin-bottom: 15px;
+                text-align: center;
+                border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+
+            .login-btn {
+                width: 100%;
+                padding: 12px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: var(--radius-md);
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                transition: background 0.3s ease;
+
+                &:hover {
+                    background: var(--primary-hover);
+                }
+            }
+        }
+    }
+
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -10%;
+        right: -5%;
+        width: 300px;
+        height: 300px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        filter: blur(80px);
+    }
+}
+
+
+
+.login-footer {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 1px solid var(--border-color); 
+
+    p {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin: 0;
+
+        .register-link {
+            color: var(--primary-color); 
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: 0.3s;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+                opacity: 0.8;
+            }
+        }
+    }
+}

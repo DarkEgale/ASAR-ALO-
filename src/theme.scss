@@ -1,0 +1,99 @@
+// ==========================================
+// 1. BRAND COLORS (Tazenix Style)
+// ==========================================
+$color-bg-dark:       #0a051a; 
+$color-primary:       #8a4fff; // Main Purple
+$color-primary-light: #a374ff;
+$color-accent:        #2de2ff; // Cyan Blue
+$color-white:         #ffffff;
+$color-text-muted:    #b0b0b0;
+$color-glass-bg:      rgba(255, 255, 255, 0.04);
+$color-glass-border:  rgba(255, 255, 255, 0.08);
+
+// ==========================================
+// 2. TYPOGRAPHY (Scalable Sizes)
+// ==========================================
+$font-main: 'Inter', system-ui, -apple-system, sans-serif;
+
+$fs-h1: 3.5rem;    // 56px
+$fs-h2: 2.5rem;    // 40px
+$fs-h3: 1.75rem;   // 28px
+$fs-body: 1rem;    // 16px
+$fs-small: 0.875rem; // 14px
+
+// ==========================================
+// 3. SPACING SYSTEM
+// ==========================================
+$space-xs: 0.5rem;  // 8px
+$space-sm: 1rem;    // 16px
+$space-md: 2rem;    // 32px
+$space-lg: 4rem;    // 64px
+$space-xl: 8rem;    // 128px
+
+// ==========================================
+// 4. BREAKPOINTS (Responsive Design)
+// ==========================================
+$bp-mobile:  576px;
+$bp-tablet:  768px;
+$bp-desktop: 1024px;
+$bp-xl:      1440px;
+
+// ==========================================
+// 5. REUSABLE MIXINS (The Magic)
+// ==========================================
+
+// Glassmorphism Effect
+@mixin glass-card {
+  background: $color-glass-bg;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $color-glass-border;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+// Flex Center Shortcut
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Media Query Shortcut
+@mixin mq($size) {
+  @media (max-width: $size) { @content; }
+}
+
+// ==========================================
+// 6. GLOBAL UTILITIES (Apply to classes)
+// ==========================================
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-sm;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #fff, $color-primary-light);
+
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, $color-primary, #6a30d9);
+  color: $color-white;
+  padding: 0.8rem 2rem;
+  border-radius: 100px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(138, 79, 255, 0.3);
+  }
+}

@@ -14,7 +14,7 @@ export const doctorLogin = async (credentials) => {
 
     if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed");
+        throw new Error(errorData.message || "Erro Login failed");
     }
 
     return await response.json();

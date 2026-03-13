@@ -13,7 +13,7 @@ export const userRegister=async(candirals)=>{
         body:JSON.stringify(candirals)
     })
     if(!res.ok){
-       return console.log("Error during fetch")
+       return console.log("Error during Registration")
     }
     
 

@@ -5,7 +5,7 @@ export const userRegister=async(candirals)=>{
 
 
 
-    const res= await fetch('http://localhost:5001/api/auth/register',{
+    const res= await fetch('https://asar-alo.onrender.com/api/auth/register',{
         method:"POST",
         headers:{
             'content-type':'application/json'

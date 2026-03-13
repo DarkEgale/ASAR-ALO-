@@ -75,7 +75,7 @@ const AppointmentBooking = ({ doctor, isOpen, onClose }) => {
                 discription: formData.description 
             };
 
-            const res = await fetch('http://localhost:5001/api/auth/create/appiontments', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/create/appiontments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

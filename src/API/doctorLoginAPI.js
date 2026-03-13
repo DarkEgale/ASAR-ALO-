@@ -4,7 +4,7 @@
 
 
 export const doctorLogin = async (credentials) => {
-    const response = await fetch("http://localhost:5001/api/auth/doctors/login", {
+    const response = await fetch("https://asar-alo.onrender.com/api/auth/doctors/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

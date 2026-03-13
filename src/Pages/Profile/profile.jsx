@@ -20,7 +20,7 @@ const Profile = () => {
     // ১. আপনার দেওয়া fetchUser ফাংশন
     const fetchUser = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/my', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/my', {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -40,7 +40,7 @@ const Profile = () => {
                 phone: data.phone || ""
             });
             if (data.image) {
-                setPreviewUrl(`http://localhost:5001${data.image}`);
+                setPreviewUrl(`https://asar-alo.onrender.com${data.image}`);
             }
             setUser(data);
         } catch (error) {
@@ -77,19 +77,19 @@ const Profile = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:5001/api/auth/update-profile", {
+            const res = await fetch("https://asar-alo.onrender.com/api/auth/update-profile", {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
-                body: data // FormData এর জন্য headers এ content-type দিতে হয় না
+                body: data 
             });
 
             const result = await res.json();
             if (res.ok) {
                 setUser(result.user);
                 if (result.user.image) {
-                    setPreviewUrl(`http://localhost:5001${result.user.image}`);
+                    setPreviewUrl(`https://asar-alo.onrender.com${result.user.image}`);
                 }
                 setMessage({ type: "success", text: "Profile updated successfully!" });
             } else {

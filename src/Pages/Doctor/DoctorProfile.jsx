@@ -22,7 +22,7 @@ const DoctorProfile = () => {
     // Fetch Doctor Profile
     const fetchDoctor = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/doctors/my', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my', {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -44,7 +44,7 @@ const DoctorProfile = () => {
                 availableTime: data.availableTime || ""
             });
             if (data.image) {
-                setPreviewUrl(`http://localhost:5001${data.image}`);
+                setPreviewUrl(`https://asar-alo.onrender.com${data.image}`);
             }
         } catch (error) {
             console.error(error.message);
@@ -82,7 +82,7 @@ const DoctorProfile = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:5001/api/auth/doctors/update-profile", {
+            const res = await fetch("https://asar-alo.onrender.com/api/auth/doctors/update-profile", {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -93,14 +93,14 @@ const DoctorProfile = () => {
             const result = await res.json();
             if (res.ok) {
                 if (result.doctor.image) {
-                    setPreviewUrl(`http://localhost:5001${result.doctor.image}`);
+                    setPreviewUrl(`https://asar-alo.onrender.com${result.doctor.image}`);
                 }
                 setMessage({ type: "success", text: "Profile updated successfully!" });
             } else {
                 setMessage({ type: "error", text: result.message || "Update failed" });
             }
         } catch (error) {
-            setMessage({ type: "error", text: "Server error occurred!" });
+            setMessage({ type: "error", text: "Server error occurred" });
         } finally {
             setLoading(false);
         }

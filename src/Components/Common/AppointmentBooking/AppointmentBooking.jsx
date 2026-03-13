@@ -10,7 +10,7 @@ const AppointmentBooking = ({ doctor, isOpen, onClose }) => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
     
-    // Initial state-a patientName field add kora hoyeche
+
     const [formData, setFormData] = useState({
         patientName: '', 
         date: '',
@@ -19,7 +19,7 @@ const AppointmentBooking = ({ doctor, isOpen, onClose }) => {
         description: ''
     });
 
-    // Jodi user logged-in thake, tobe tar default name-ta field-a bosate paren
+
     useEffect(() => {
         if (user && user.name) {
             setFormData(prev => ({ ...prev, patientName: user.name }));
@@ -28,7 +28,7 @@ const AppointmentBooking = ({ doctor, isOpen, onClose }) => {
 
     if (!isOpen) return null;
 
-    // Login check
+
     if (!user) {
         return (
             <div className="booking-modal open">
@@ -93,7 +93,7 @@ const AppointmentBooking = ({ doctor, isOpen, onClose }) => {
                     setFormData({ patientName: '', date: '', time: '', age: '', description: '' });
                 }, 2000);
             } else {
-                setMessage({ type: 'error', text: data.message || 'Booking failed' });
+                setMessage({ type: 'error', text: data.message || 'Error Booking failed' });
             }
         } catch (error) {
             setMessage({ type: 'error', text: 'Network connection issue' });

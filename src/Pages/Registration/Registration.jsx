@@ -112,6 +112,6 @@ const handleRegister = async (e) => {
             </div>
         </div>
     );
-};
+};//data
 
 export default Register;

@@ -17,7 +17,7 @@ const MyAppointments = () => {
 
     const fetchAppointments = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/my/appiontments', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/my/appiontments', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -32,7 +32,7 @@ const MyAppointments = () => {
 
     const fetchPrescriptions = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/my/prescriptions', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/my/prescriptions', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -40,7 +40,7 @@ const MyAppointments = () => {
             const data = await res.json();
             setPrescriptions(data.prescriptions || []);
         } catch (error) {
-            console.error('Error fetching prescriptions:', error);
+            console.error('Error fetching prescriptions data:', error);
         } finally {
             setLoading(false);
         }
@@ -52,7 +52,7 @@ const MyAppointments = () => {
 
     const downloadPDF = async (prescriptionId, filename) => {
         try {
-            const res = await fetch(`http://localhost:5001/api/auth/prescription/download/${prescriptionId}`, {
+            const res = await fetch(`https://asar-alo.onrender.com/api/auth/prescription/download/${prescriptionId}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }

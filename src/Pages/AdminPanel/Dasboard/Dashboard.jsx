@@ -26,7 +26,7 @@ export default function AdminDashboard() {
     });
 
     const token = localStorage.getItem('token');
-    const BASE_URL = 'http://localhost:5001/api/admin/auth';
+    const BASE_URL = 'https://asar-alo.onrender.com/api/admin/auth';
 
     const fetchData = async (tab) => {
         setLoading(true);
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        // ডক্টরদের জন্য আলাদা পাথ মেইনটেইন করা হয়েছে
+   
         let subPath = activeTab === 'doctors' ? 'doctor' : 
                       activeTab === 'appointments' ? 'appiontments' : 'user';
         
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
                 body: JSON.stringify(selectedItem)
             });
             if (response.ok) {
-                alert("Successfully Updated!");
+                alert("Successfully Updated Data!");
                 setIsModalOpen(false);
                 fetchData(activeTab);
             }

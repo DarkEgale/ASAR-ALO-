@@ -33,7 +33,7 @@ const PrescriptionWriter = () => {
 
     const fetchAppointments = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/doctors/my/appiontments', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my/appiontments', {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
             const data = await res.json();
@@ -88,14 +88,14 @@ const PrescriptionWriter = () => {
             formData.append('instructions', prescriptionData.instructions);
             formData.append('prescriptionPdf', pdfBlob, `prescription-${selectedAppointment._id}.pdf`);
 
-            const res = await fetch('http://localhost:5001/api/auth/doctors/create-prescription', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/create-prescription', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
                 body: formData
             });
 
             if (res.ok) {
-                setMessage({ type: 'success', text: 'Prescription Saved Successfully!' });
+                setMessage({ type: 'success', text: 'Prescription Saved Successfully!!' });
                 setTimeout(() => navigate('/doctor-dashboard'), 2000);
             } else {
                 setMessage({ type: 'error', text: 'Failed to upload' });
@@ -189,7 +189,7 @@ const PrescriptionWriter = () => {
                                 
                                 {selectedAppointment?.doctorId?.image ? (
                                     <img 
-                                        src={`http://localhost:5001${selectedAppointment.doctorId.image}`} 
+                                        src={`https://asar-alo.onrender.com${selectedAppointment.doctorId.image}`} 
                                         alt="Doctor" 
                                         crossOrigin="anonymous" 
                                         style={{ 

@@ -7,7 +7,7 @@ const MedicalReports = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
 
-    // ডামি রিপোর্ট ডাটা (পরবর্তীতে এপিআই থেকে আসবে)
+
     const [reports, setReports] = useState([
         { id: 1, title: "Blood Test Report", date: "2024-02-15", doctor: "Dr. Ariful Islam", fileUrl: "/reports/blood-test.pdf" },
         { id: 2, title: "X-Ray Chest", date: "2024-01-20", doctor: "Dr. Sarah Ahmed", fileUrl: "/reports/xray.pdf" },
@@ -15,14 +15,14 @@ const MedicalReports = () => {
     ]);
 
     const handleDownload = (fileUrl, title) => {
-        // ডাউনলোড লজিক: সরাসরি লিঙ্কে পাঠানো বা ফাইল ডাউনলোড শুরু করা
-        window.open(`http://localhost:5001${fileUrl}`, '_blank');
+
+        window.open(`https://asar-alo.onrender.com${fileUrl}`, '_blank');
         console.log(`Downloading ${title}...`);
-    };
+    };//check
 
     return (
         <div className="reports-page">
-            {/* উপরের নেভিগেশন বার */}
+
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate('/user-dashboard')}>
                     <ArrowLeft size={20} />
@@ -32,7 +32,7 @@ const MedicalReports = () => {
             </div>
 
             <div className="reports-container">
-                {/* সার্চ ফিল্টার */}
+
                 <div className="search-section">
                     <div className="search-input">
                         <Search size={18} />
@@ -44,7 +44,7 @@ const MedicalReports = () => {
                     </div>
                 </div>
 
-                {/* রিপোর্ট লিস্ট */}
+
                 <div className="reports-list">
                     {reports.length > 0 ? (
                         reports.map((report) => (

@@ -12,7 +12,7 @@ const DoctorPrescriptions = () => {
 
     const fetchPrescriptions = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/doctors/my/prescriptions', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my/prescriptions', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -20,7 +20,7 @@ const DoctorPrescriptions = () => {
             const data = await res.json();
             setPrescriptions(data.prescriptions || []);
         } catch (error) {
-            console.error('Error fetching prescriptions:', error);
+            console.error('Error fetch prescriptions:', error);
         } finally {
             setLoading(false);
         }
@@ -28,7 +28,7 @@ const DoctorPrescriptions = () => {
 
     const downloadPDF = (pdfPath, filename) => {
         const link = document.createElement('a');
-        link.href = `http://localhost:5001${pdfPath}`;
+        link.href = `https://asar-alo.onrender.com${pdfPath}`;
         link.download = filename;
         link.click();
     };

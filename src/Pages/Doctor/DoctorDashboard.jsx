@@ -30,7 +30,7 @@ const DoctorDashboard = () => {
 
 
     const fetchDoctorDashboard=async()=>{
-        const res=await fetch('http://localhost:5001/api/auth/doctors/my',{
+        const res=await fetch('https://asar-alo.onrender.com/api/auth/doctors/my',{
             method:"GET",
             headers:{
                 'content-type': 'application/json',
@@ -51,7 +51,7 @@ const DoctorDashboard = () => {
 
     const fetchAppointments = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/doctors/my/appiontments', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my/appiontments', {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -70,7 +70,7 @@ const DoctorDashboard = () => {
 
     console.log(user)
 
-    // --- গ্রাফের জন্য ডাটা প্রিপারেশন (গত ৭ দিনের হিসাব) ---
+
     const getChartData = () => {
         const last7Days = [...Array(7)].map((_, i) => {
             const d = new Date();
@@ -88,7 +88,7 @@ const DoctorDashboard = () => {
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            const res = await fetch(`http://localhost:5001/api/auth/doctors/modify/status/${id}`, {
+            const res = await fetch(`https://asar-alo.onrender.com/api/auth/doctors/modify/status/${id}`, {
                 method: "PATCH",
                 headers: {
                     'content-type': 'application/json',

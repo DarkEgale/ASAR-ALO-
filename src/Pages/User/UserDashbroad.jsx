@@ -17,7 +17,7 @@ const UserDashboard = () => {
 
 
     const fetchUser=async()=>{
-        const res=await fetch('http://localhost:5001/api/auth/my',{
+        const res=await fetch('https://asar-alo.onrender.com/api/auth/my',{
             method:"GET",
             headers:{
                 'content-type':'application/json',
@@ -36,7 +36,7 @@ const UserDashboard = () => {
 
     const fetchPrescriptions = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/my/prescriptions', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/my/prescriptions', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -50,7 +50,7 @@ const UserDashboard = () => {
 
     const downloadPDF = async (prescriptionId, filename) => {
         try {
-            const res = await fetch(`http://localhost:5001/api/auth/prescription/download/${prescriptionId}`, {
+            const res = await fetch(`https://asar-alo.onrender.com/api/auth/prescription/download/${prescriptionId}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -69,7 +69,7 @@ const UserDashboard = () => {
             window.URL.revokeObjectURL(url);
         } catch (error) {
             console.error('Error downloading prescription:', error);
-            alert('Failed to download prescription. Please try again.');
+            alert('Failed to download prescription. Please try again..');
         }
     };
 

@@ -44,7 +44,7 @@ const FindDoctor = () => {
                 }
             } catch (error) {
                 console.error('Error fetching doctors:', error);
-                // Fallback to dummy data
+                
                 const tempDoctors = [
                     { _id: 1, name: "Dr. Shimul", specialization: "Cardiology", fee: 1000 },
                     { _id: 2, name: "Dr. Ariful", specialization: "Neurology", fee: 1200 },

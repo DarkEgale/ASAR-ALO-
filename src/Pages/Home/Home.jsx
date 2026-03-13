@@ -17,14 +17,14 @@ const Home = () => {
     },[])
     
     const fecthDoctors=async()=>{
-        const res=await fetch("http://localhost:5001/api/auth/doctors/all",{
+        const res=await fetch("https://asar-alo.onrender.com/api/auth/doctors/all",{
             method:"GET",
             headers:{
                 'content-type':'application/json'
             }
         })
         if(!res.ok){
-            throw new Error("Error during fecth doctors");
+            throw new Error("Error during fecth all doctors");
             
         }
 

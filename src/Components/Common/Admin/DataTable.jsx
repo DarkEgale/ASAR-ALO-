@@ -49,7 +49,7 @@ export default function DataTable({ data, activeTab, loading, onEdit, onDelete }
                             </td>
                         </tr>
                     )) : (
-                        <tr><td colSpan="3" className="empty-msg">No {activeTab} found.</td></tr>
+                        <tr><td colSpan="3" className="empty-msg">No {activeTab} found..</td></tr>
                     )}
                 </tbody>
             </table>

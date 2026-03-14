@@ -2,13 +2,15 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../Context/authContext';
 import UserSidebar from '../../Components/Common/Sidebar/Sidebar';
-import { Calendar, ClipboardList, Activity, User, Download } from "lucide-react";
+import { Calendar, ClipboardList, Activity, User, Download,ArrowRight,ArrowLeft} from "lucide-react";
 import "./userdashboard.scss";
+import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = () => {
     const[user,setUser]=useState(null)
     const [prescriptions, setPrescriptions] = useState([]);
-
+    const [toogle,setToogle]=useState(false)
+    const navigate=useNavigate()
 
     useEffect(()=>{
         fetchUser()
@@ -73,19 +75,30 @@ const UserDashboard = () => {
         }
     };
 
+    const handelToogle=()=>{
+        if(toogle === true){
+            setToogle(false)
+        }else{
+            setToogle(true)
+        }
+    }
+
     return (
         <div className="user-dashboard">
-            <UserSidebar/>
+            {
+                toogle&&
+                <UserSidebar/>
+            }
             
             <main className="dashboard-content">
-                <header>
+                <header className='header'>
+                    <label htmlFor=""onClick={handelToogle}>{!toogle===true?<ArrowRight/>:<ArrowLeft/>}</label>
                     <div className="welcome-text">
-                        <h1>Welcome back, {user?.name || "User"}!</h1>
-                        <p>Here’s what’s happening with your health today.</p>
+
+                        <h1> {user?.name || "User"}!</h1>
                     </div>
                     <div className="user-profile">
-                        <div className="avatar">{user?.name?.charAt(0) || <User size={18}/>}</div>
-                        <span>{user?.email}</span>
+                        <div className="avatar" onClick={()=>navigate('/user-profile')}><img src={`https://asar-alo.onrender.com${user?.image}`} alt="" /></div>
                     </div>
                 </header>
 
@@ -133,15 +146,17 @@ const UserDashboard = () => {
                                     {prescriptions.slice(0, 5).map(prescription => (
                                         <tr key={prescription._id}>
                                             <td>{prescription.doctorName}</td>
-                                            <td>{prescription.diagnosis}</td>
+                                            <td title={prescription.diagnosis} className="diagnosis-cell">
+                                                {prescription.diagnosis.split(" ").slice(0,3).join(" ")}...</td>
                                             <td>{new Date(prescription.createdAt).toLocaleDateString()}</td>
                                             <td>
                                                 <button 
                                                     className="download-btn"
                                                     onClick={() => downloadPDF(prescription._id, `prescription-${prescription._id}.pdf`)}
+                                                    title='Download'
                                                 >
                                                     <Download size={16} />
-                                                    Download
+                                                    
                                                 </button>
                                             </td>
                                         </tr>

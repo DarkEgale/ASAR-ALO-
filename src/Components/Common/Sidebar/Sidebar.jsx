@@ -8,7 +8,7 @@ import {
     UserCircle, 
     Settings, 
     LogOut, 
-    HeartPulse 
+    HeartPulse,HomeIcon
 } from 'lucide-react';
 import './userSidebar.scss';
 
@@ -22,11 +22,11 @@ const UserSidebar = () => {
     };
 
     const menuItems = [
+        {path:'/',name:'Home',icon:<HomeIcon size={20}/>},
         { path: '/user-dashboard', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
         { path: '/my-appointments', name: 'Appointments', icon: <CalendarCheck size={20} /> },
         { path: '/my-reports', name: 'My Reports', icon: <FileText size={20} /> },
-        { path: '/user-profile', name: 'Profile', icon: <UserCircle size={20} /> },
-        { path: '/settings', name: 'Settings', icon: <Settings size={20} /> },
+        { path: '/user-profile', name: 'Profile', icon: <UserCircle size={20} /> }
     ];
 
     return (
@@ -39,7 +39,6 @@ const UserSidebar = () => {
             </div>
 
             <nav className="nav-links">
-                <button onClick={()=>navigate('/')} className="nav-item"> Back to Home</button>
                 {menuItems.map((item, index) => (
                     <NavLink 
                         key={index} 

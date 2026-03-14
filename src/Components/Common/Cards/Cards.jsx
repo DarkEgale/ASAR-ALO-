@@ -23,7 +23,7 @@ const Card = ({ doctor, onBookNow }) => {
     return (
         <div className="custom-card">
             <div className="card-image">
-                <img src={data.image || "https://via.placeholder.com/300x200"} alt={data.name} />
+                <img src={`https://asar-alo.onrender.com${data.image}` || "https://via.placeholder.com/300x200"} alt={data.name} />
                 <div className="badge">Available</div>
             </div>
 

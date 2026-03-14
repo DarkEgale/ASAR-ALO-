@@ -73,8 +73,8 @@ const Navbar = () => {
             <button className="btn-login secondary" onClick={() => { navigate('/doctor-login'); setIsMobileMenuOpen(false); }}>
                 Doctor Portal
             </button>
-            <button className="btn-login primary" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                
+            <button className="btn-login primary" onClick={() => { user?navigate('/user-dashboard'):navigate('/login'); setIsMobileMenuOpen(false); }}>
+                {user?"Dashboard":"Sing In"}
             </button>
         </div>
     </div>

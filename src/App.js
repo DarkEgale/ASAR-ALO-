@@ -20,6 +20,8 @@ import FindDoctor from './Pages/FindDoctor/findDoctor';
 import Profile from './Pages/Profile/profile';
 import MedicalReports from './Pages/userReports/Reports';
 import MyAppointments from './Pages/userAppiontments/UserAppiontments';
+import Services from './Pages/Services/services';
+import Contact from './Pages/Contact/contact';
 
 function App() {
   return (
@@ -85,6 +87,8 @@ function App() {
               }/>
 
               <Route path='/find-doctors' element={<FindDoctor/>}/>
+              <Route path='/services' element={<Services/>}/>
+              <Route path='/contact' element={<Contact/>}/>
 
               {/* Catch-all to Home */}
               <Route path="*" element={<Navigate to="/" replace />} />

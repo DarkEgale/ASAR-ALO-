@@ -3,23 +3,23 @@
   "name": "HealthSync Medical Center",
   "icons": [
     {
-      "src": "logo512.png",
+      "src": "app-logo512.png",
       "type": "image/png",
       "sizes": "751x751",
       "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "app-logo512.png",
       "type": "image/png",
       "sizes": "751x751",
       "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#0984e3",
   "background_color": "#ffffff",
-  "id": "/healthsync-pwa",
+  "id": "healthsync-pwa-v1",
   "description": "HealthSync is a smart healthcare portal designed to help patients find expert doctors, book appointments online, and manage health records easily.",
   "dir": "ltr",
   "lang": "en",

@@ -90,6 +90,10 @@
             padding: 24px;
             box-shadow: var(--shadow-sm);
 
+            @media (max-width:740px) {
+                margin-top: 0px;
+            }
+
             .section-header {
                 display: flex;
                 justify-content: space-between;
@@ -132,14 +136,36 @@
 // Responsive Logic
 @media (max-width: 768px) {
     .user-dashboard {
-        flex-direction: column;
+        flex-direction: row;
+        margin-top: 0;
+        width: 100%;
         .dashboard-content {
             padding: 16px;
+            flex-direction: column;
+            .main-section{
+                display: flex;
+                flex-direction: column;
+                .prescription-table{
+                    display: flex;
+                    flex-direction: column;
+                    th,td{
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        display: flex;
+                        flex-direction: row;
+                    }
+                    th{
+                        background: #22c55e;
+                    }
+                }
+            }
             header {
                 flex-direction: column;
                 align-items: flex-start;
+                justify-content: flex-start;
                 gap: 16px;
-                .user-profile { width: 100%; justify-content: center; }
+                .user-profile { width: 100%;justify-content: center; }
             }
         }
     }

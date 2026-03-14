@@ -39,6 +39,7 @@ const UserSidebar = () => {
             </div>
 
             <nav className="nav-links">
+                <button onClick={()=>navigate('/')} className="nav-item"> Back to Home</button>
                 {menuItems.map((item, index) => (
                     <NavLink 
                         key={index} 

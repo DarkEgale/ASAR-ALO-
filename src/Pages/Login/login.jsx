@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../Context/authContext";
 import { useNavigate } from "react-router-dom";
-import { Lock, Mail, LogIn, Shield } from "lucide-react"; 
+import { Lock, Mail, LogIn, Shield,LogOut} from "lucide-react"; 
 import "./login.scss"; 
 
 const Login = () => {
@@ -29,7 +29,6 @@ const Login = () => {
 
     return (
         <div className="login-page">
-                <button onClick={()=>navigate('/')} className="login"> Back to Home</button>
             <div className="login-card">
                 <div className="login-header">
                     <div className="logo-icon">
@@ -67,6 +66,7 @@ const Login = () => {
                         <LogIn size={18} />
                         <span>Sign In</span>
                     </button>
+                <button onClick={()=>navigate('/')} className="login-btn"style={{background:"green",marginTop:"10px"}}> <LogOut size={20}/>Back to Home</button>
                 </form>
                 
 

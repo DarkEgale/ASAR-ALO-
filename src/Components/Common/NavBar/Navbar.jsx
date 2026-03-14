@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { HeartPulse, Menu, X, LogIn } from 'lucide-react';
 import './Navbar.scss';
+import { useAuth } from '../../../Context/authContext';
 
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const {user}=useAuth()
 
     // Scroll effect logic
     useEffect(() => {
@@ -47,8 +49,8 @@ const Navbar = () => {
                     <button className="btn-login secondary" onClick={() => navigate('/doctor-login')}>
                         Doctor Portal
                     </button>
-                    <button className="btn-login primary" onClick={() => navigate('/login')}>
-                        Sign In
+                    <button className="btn-login primary" onClick={() => user?navigate('user-dashboard'):navigate('/login')}>
+                        {user?"Dashboard":"Sing In"}
                     </button>
                 </div>
 
@@ -72,7 +74,7 @@ const Navbar = () => {
                 Doctor Portal
             </button>
             <button className="btn-login primary" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
-                Sign In
+                
             </button>
         </div>
     </div>

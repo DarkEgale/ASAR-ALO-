@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../Context/authContext";
 import { useNavigate } from "react-router-dom";
-import { Stethoscope, LogIn, Loader2 } from "lucide-react";
+import { Stethoscope, LogIn, Loader2, LogOut} from "lucide-react";
 import "./doctorLogin.scss";
 
 const DoctorLogin = () => {
@@ -36,6 +36,7 @@ const DoctorLogin = () => {
     return (
         <div className="doctor-login-page">
             <div className="login-card">
+
                 <div className="header">
                     <div className="icon-wrapper">
                         <Stethoscope size={32} />
@@ -85,6 +86,7 @@ const DoctorLogin = () => {
                             </>
                         )}
                     </button>
+                <button onClick={()=>navigate('/')} className="submit-btn"style={{background:"green",marginTop:"10px"}}><LogOut size={20}/> Back to Home</button>
                 </form>
             </div>
         </div>

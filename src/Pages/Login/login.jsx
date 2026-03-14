@@ -29,6 +29,7 @@ const Login = () => {
 
     return (
         <div className="login-page">
+                <button onClick={()=>navigate('/')} className="login"> Back to Home</button>
             <div className="login-card">
                 <div className="login-header">
                     <div className="logo-icon">

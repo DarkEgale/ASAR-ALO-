@@ -41,6 +41,7 @@ const DoctorSidebar = () => {
             </div>
 
             <nav className="nav-links">
+                <button onClick={()=>navigate('/')} className="login"> Back to Home</button>
                 {menuItems.map((item, index) => (
                     <NavLink 
                         key={index} 

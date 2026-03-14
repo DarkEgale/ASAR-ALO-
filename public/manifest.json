@@ -3,15 +3,15 @@
   "name": "HealthSync Medical Center",
   "icons": [
     {
-      "src": "app-logo512.png",
+      "src": "app-logo192.png",
       "type": "image/png",
-      "sizes": "751x751",
+      "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "app-logo512.png",
+      "src": "app-logo192.png",
       "type": "image/png",
-      "sizes": "751x751",
+      "sizes": "192x192",
       "purpose": "maskable"
     }
   ],

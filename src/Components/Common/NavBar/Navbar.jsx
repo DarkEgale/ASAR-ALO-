@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { HeartPulse, Menu, X, LogIn } from 'lucide-react';
 import './Navbar.scss';
 
+
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,7 +25,11 @@ const Navbar = () => {
                 {/* Brand Logo */}
                 <div className="nav-logo" onClick={() => navigate('/')}>
                     <div className="logo-box">
-                        <HeartPulse size={24} />
+                        <img 
+                            src="/app-logo192.png" 
+                            alt="Health Sync Logo" 
+                            style={{ width: '60px', height: '60px' }} 
+                        />
                     </div>
                     <h2>HealthSync</h2>
                 </div>

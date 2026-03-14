@@ -1,3 +1,23 @@
 # https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
+
+User-agent: 
+
+# Public Pages 
+Allow: /
+Allow: /find-doctors
+Allow: /login
+Allow: /register
+
+# Private/Dashboard Pages 
+Disallow: /admin-dashboard
+Disallow: /user-dashboard
+Disallow: /doctor-dashboard
+Disallow: /doctor-profile
+Disallow: /prescription-writer
+Disallow: /prescriptions
+Disallow: /user-profile
+Disallow: /my-reports
+Disallow: /my-appointments
+
+# Sitemap Link - 
+Sitemap: https://www.mdshimulhossen.top/sitemap.xml

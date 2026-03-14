@@ -1,15 +1,14 @@
 import React, { StrictMode } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// HashRouter বদলে BrowserRouter ব্যবহার করা হয়েছে
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './Context/authContext';
 import './App.css';
-
 
 import Registration from './Pages/Registration/Registration';
 import Login from './Pages/Login/login';
 import DoctorLogin from './Pages/DoctorLogin/doctorLogin';
 import AdminDashboard from './Pages/AdminPanel/Dasboard/Dashboard';
 import UserDashboard from './Pages/User/UserDashbroad';
-import Card from './Components/Common/Cards/Cards';
 import Footer from './Components/Common/Footer/Footer';
 import Home from './Pages/Home/Home';
 import DoctorDashboard from './Pages/Doctor/DoctorDashboard';
@@ -22,7 +21,6 @@ import Profile from './Pages/Profile/profile';
 import MedicalReports from './Pages/userReports/Reports';
 import MyAppointments from './Pages/userAppiontments/UserAppiontments';
 
-
 function App() {
   return (
     <StrictMode>
@@ -33,7 +31,6 @@ function App() {
               {/* Default Redirect */}
               <Route path="/" element={<Home/>} />
               <Route path='/footer' element={<Footer/>}/>
-
               
               {/* Public Routes */}
               <Route path="/register" element={<Registration />} />
@@ -87,10 +84,9 @@ function App() {
                 </ProtectedRoute>
               }/>
 
-
               <Route path='/find-doctors' element={<FindDoctor/>}/>
 
-              {/* Catch-all to Login */}
+              {/* Catch-all to Home */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>

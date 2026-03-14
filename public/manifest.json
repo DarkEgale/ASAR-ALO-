@@ -1,28 +1,28 @@
 {
-  "short_name": "Health Sync",
-  "name": "Health Sync Medical Center",
+  "short_name": "HealthSync",
+  "name": "HealthSync Medical Center",
   "icons": [
     {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "751x751",
+      "purpose": "maskable"
     }
   ],
-  "start_url": "https://www.mdshimulhossen.top/",
+  "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#0984e3",
   "background_color": "#ffffff",
-  "id": "com.mdshimulhossen.healthsync",
-  "description": "Health Sync is a smart healthcare portal designed to help patients find expert doctors, book appointments online, and manage health records easily.",
+  "id": "/healthsync-pwa",
+  "description": "HealthSync is a smart healthcare portal designed to help patients find expert doctors, book appointments online, and manage health records easily.",
   "dir": "ltr",
   "lang": "en",
-  "scope": "https://www.mdshimulhossen.top/",
+  "scope": "/",
   "orientation": "portrait"
 }

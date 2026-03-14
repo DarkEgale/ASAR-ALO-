@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "top.mdshimulhossen.www.twa",
+        "sha256_cert_fingerprints": ["13:FF:6E:9F:73:31:2E:FE:66:AF:EF:A8:07:F6:58:FD:36:1D:BD:03:FB:7C:E9:89:D1:4D:19:5E:5F:8E:68:92"]
+      }
+    }]

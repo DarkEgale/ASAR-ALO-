@@ -3,16 +3,8 @@ import { MapPin, Star, Clock, ArrowRight } from 'lucide-react';
 import './Card.scss';
 
 const Card = ({ doctor, onBookNow }) => {
-    // ডাক্তার না থাকলে স্যাম্পল ডাটা দেখাবে
-    const data = doctor || {
-        name: "Dr. Ariful Islam",
-        specialization: "Cardiologist",
-        location: "Natore Sadar Hospital",
-        experience: "10 Years Exp.",
-        rating: "4.9",
-        image: "https://via.placeholder.com/300x200",
-        fee: "500 BDT"
-    };
+
+    const data = doctor 
 
     const handleBookNow = () => {
         if (onBookNow) {

@@ -9,6 +9,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
+    max-width: 400px;
 
     &:hover {
         transform: translateY(-8px);

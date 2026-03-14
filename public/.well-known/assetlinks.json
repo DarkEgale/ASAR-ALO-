@@ -3,6 +3,6 @@
       "target": {
         "namespace": "android_app",
         "package_name": "top.mdshimulhossen.www.twa",
-        "sha256_cert_fingerprints": ["13:FF:6E:9F:73:31:2E:FE:66:AF:EF:A8:07:F6:58:FD:36:1D:BD:03:FB:7C:E9:89:D1:4D:19:5E:5F:8E:68:92"]
+        "sha256_cert_fingerprints": ["4C:7F:EE:7B:8B:CB:4E:C3:28:C3:DB:B2:97:80:97:D2:F4:D9:63:20:20:E3:1D:8C:5F:73:B9:54:74:5D:1B:A5"]
       }
     }]

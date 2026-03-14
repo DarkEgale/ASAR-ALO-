@@ -53,12 +53,25 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Dropdown (Optional logic) */}
-            {isMobileMenuOpen && (
-                <div className="mobile-menu-overlay">
-                    {/* মোবাইল মেনুর কন্টেন্ট এখানে হবে */}
-                </div>
-            )}
+
+{isMobileMenuOpen && (
+    <div className="mobile-menu-overlay">
+        <NavLink to="/" className="link" onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
+        <NavLink to="/find-doctors" className="link" onClick={() => setIsMobileMenuOpen(false)}>Find Doctors</NavLink>
+        <NavLink to="/services" className="link" onClick={() => setIsMobileMenuOpen(false)}>Services</NavLink>
+        <NavLink to="/contact" className="link" onClick={() => setIsMobileMenuOpen(false)}>Contact</NavLink>
+        
+        
+        <div className="mobile-nav-actions">
+            <button className="btn-login secondary" onClick={() => { navigate('/doctor-login'); setIsMobileMenuOpen(false); }}>
+                Doctor Portal
+            </button>
+            <button className="btn-login primary" onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}>
+                Sign In
+            </button>
+        </div>
+    </div>
+)}
         </nav>
     );
 };

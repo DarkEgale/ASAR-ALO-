@@ -1,6 +1,4 @@
-
 @import url('../../../index.scss');
-
 
 .navbar-container {
     width: 100%;
@@ -16,8 +14,8 @@
     padding: 0 5%;
 
     &.scrolled {
-        background: rgba(var(--card-bg-rgb), 0.8);
-        backdrop-filter: blur(12px);
+        background: rgba(var(--card-bg-rgb), 0.85);
+        backdrop-filter: blur(15px);
         height: 70px;
         box-shadow: var(--shadow-sm);
         border-bottom: 1px solid var(--border-color);
@@ -35,12 +33,16 @@
             align-items: center;
             gap: 10px;
             cursor: pointer;
+            z-index: 1002; // লোগো যেন সবসময় উপরে থাকে
             
             .logo-box {
                 background: var(--primary-color);
                 color: white;
                 padding: 6px;
                 border-radius: var(--radius-md);
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             h2 {
@@ -63,14 +65,8 @@
                 font-weight: 500;
                 transition: 0.3s;
                 
-                &:hover {
-                    color: var(--primary-color);
-                }
-
-                &.active {
-                    color: var(--primary-color);
-                    font-weight: 600;
-                }
+                &:hover { color: var(--primary-color); }
+                &.active { color: var(--primary-color); font-weight: 600; }
             }
         }
 
@@ -105,18 +101,73 @@
         }
 
         .mobile-toggle {
-            display: none;
+            display: none; // ডেস্কটপে লুকানো
             color: var(--text-main);
             cursor: pointer;
+            z-index: 1002; 
+            padding: 5px;
+        }
+    }
+
+    // --- মোবাইল মেনু ড্রপডাউন স্টাইল ---
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        padding: 100px 30px 40px;
+        gap: 20px;
+        z-index: 1001;
+        animation: slideIn 0.3s ease-out;
+
+        .link {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            
+            &.active { color: var(--primary-color); }
+        }
+
+        .mobile-nav-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            
+            button { width: 100%; }
         }
     }
 }
 
+
 @media (max-width: 992px) {
     .navbar-container {
+        padding: 0 20px;
+        
         .navbar-inner {
-            .nav-links, .nav-actions { display: none; }
-            .mobile-toggle { display: block; }
+            .nav-links, .nav-actions {
+                display: none; 
+            }
+
+            .mobile-toggle {
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+                margin-right: 40px;
+            }
         }
     }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
 }

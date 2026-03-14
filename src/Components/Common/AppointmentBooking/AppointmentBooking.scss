@@ -87,10 +87,12 @@
                         &.login-btn {
                             background: var(--primary-color, #3b82f6);
                             color: white;
+                            text-align: center;
                         }
                         &.register-btn {
                             background: #10b981;
                             color: white;
+                            text-align: center;
                         }
                         &:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
                     }

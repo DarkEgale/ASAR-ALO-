@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, Clock, User, MessageSquare, CheckCircle, AlertCircle } from 'lucide-react';
+import { X, Calendar, Clock, User, MessageSquare, CheckCircle, AlertCircle ,ShieldAlert} from 'lucide-react';
 import { useAuth } from '../../../Context/authContext';
 import { useNavigate } from 'react-router-dom';
 import './AppointmentBooking.scss';
@@ -40,7 +40,7 @@ const AppointmentBooking = ({ doctor, isOpen, onClose }) => {
                     </div>
                     <div className="modal-body">
                         <div className="login-prompt">
-                            <div className="lock-icon">🔒</div>
+                            <div className="lock-icon"><ShieldAlert size={60}/></div>
                             <h3>Authentication Required</h3>
                             <p>Please login to your account to book an appointment.</p>
                             <div className="action-buttons">

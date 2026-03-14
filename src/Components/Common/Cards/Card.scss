@@ -9,7 +9,11 @@
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    max-width: 400px;
+    
+
+    @media (max-width:740px) {
+        min-height: 500px;
+    }
 
     &:hover {
         transform: translateY(-8px);
@@ -23,6 +27,10 @@
         background: var(--bg-color);
         position: relative;
         overflow: hidden;
+
+        @media (max-width:740px) {
+            min-height: 350px;
+        }
 
         img {
             width: 100%;

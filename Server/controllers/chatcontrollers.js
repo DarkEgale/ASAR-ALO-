@@ -1,5 +1,5 @@
-// controllers/chatController.js
-import Message from '../models/Message.js'; // আপনার তৈরি করা স্কিমা
+
+import Message from "../models/Message";
 
 export const getChatHistory = async (req, res) => {
     try {

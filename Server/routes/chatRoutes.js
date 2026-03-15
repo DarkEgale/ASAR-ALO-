@@ -1,7 +1,7 @@
-import express from 'express';
+import {Router} from 'express';
 import { getChatHistory } from '../controllers/chatcontrollers';
 
-const router = express.Router();
+const router = Router();
 
 
 router.get('/history/:roomId', getChatHistory);

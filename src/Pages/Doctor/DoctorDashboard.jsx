@@ -3,6 +3,7 @@ import { useAuth } from '../../Context/authContext';
 import DoctorSidebar from '../../Components/Common/DoctorSideBar/DoctorSidebar';
 import { Users, Clock, CheckCircle, BadgeCheck, Search, Calendar, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ChatComponent from '../../Components/Common/LiveChat/livechat';
 
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import './doctorDashboard.scss';
@@ -277,6 +278,7 @@ const DoctorDashboard = () => {
                     </section>
                 </div>
             </main>
+            <ChatComponent roomId={'1234'} user={doctor}/>
         </div>
     );
 };

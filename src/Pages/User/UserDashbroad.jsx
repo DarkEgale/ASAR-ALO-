@@ -5,6 +5,7 @@ import UserSidebar from '../../Components/Common/Sidebar/Sidebar';
 import { Calendar, ClipboardList, Activity, User, Download,ArrowRight,ArrowLeft} from "lucide-react";
 import "./userdashboard.scss";
 import { useNavigate } from 'react-router-dom';
+import ChatComponent from '../../Components/Common/LiveChat/livechat';
 
 const UserDashboard = () => {
     const[user,setUser]=useState(null)
@@ -169,6 +170,9 @@ const UserDashboard = () => {
                     </div>
                 </section>
             </main>
+
+            <ChatComponent roomId={'1234'} user={user}/>
+            
         </div>
     );
 };

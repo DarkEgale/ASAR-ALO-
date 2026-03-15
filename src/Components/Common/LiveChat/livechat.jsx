@@ -49,9 +49,9 @@ const ChatComponent = ({ roomId, user, onClose }) => {
     if (message.trim() !== "" && user) {
       const messageData = {
         roomId,
-        sender: user.name,
+        sender: user?.name,
         senderId: user?._id,
-        message: message.trim(),
+        message: message?.trim(),
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       socket.emit("send_message", messageData);
@@ -85,7 +85,7 @@ const ChatComponent = ({ roomId, user, onClose }) => {
           </div>
         )}
         {chatHistory.map((msg, index) => (
-          <div key={index} className={`message-group ${msg.senderId === user._id ? "own" : "other"}`}>
+          <div key={index} className={`message-group ${msg.senderId === user?._id ? "own" : "other"}`}>
             <div className="bubble">
               <p>{msg.message}</p>
               <span className="time">{msg.time}</span>

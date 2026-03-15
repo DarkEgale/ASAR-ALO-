@@ -9,6 +9,7 @@ import authRoutesroutes from './routes/authRoutes.js';
 import DoctorRoutes from './routes/DoctorRoutes.js';
 import AdminRoutes from'./routes/AdminRoutes.js';
 import fileUploadRouter from './routes/fileUpoladrouter.js';
+import chatRoutes from './routes/chatRoutes.js'
 
 
 
@@ -44,6 +45,7 @@ app.use('/api/auth',authRoutesroutes);
 app.use('/api/auth', fileUploadRouter);
 app.use('/api/admin/auth',AdminRoutes)
 app.use('/uploads', express.static('public/uploads'));
+app.use('/api/chat', chatRoutes);
 
 
 

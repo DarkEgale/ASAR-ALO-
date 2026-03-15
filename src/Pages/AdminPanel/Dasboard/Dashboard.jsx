@@ -6,6 +6,7 @@ import Sidebar from "../../../Components/Common/Admin/Sidebar";
 import StatCards from "../../../Components/Common/Admin/StatCards";
 import AnalyticsChart from "../../../Components/Common/Admin/AnalyticsChart";
 import DataTable from "../../../Components/Common/Admin/DataTable";
+import DoctorRegistration from "../../DcotorRegistration/DoctorRegistration";
 
 // Icons for Modals
 import { X, Stethoscope, UserCog, Activity } from "lucide-react";
@@ -123,6 +124,7 @@ export default function AdminDashboard() {
                 </header>
 
                 <StatCards data={data} activeTab={activeTab} />
+                <DoctorRegistration activeTab={activeTab}/>
 
                 {activeTab === 'appointments' && <AnalyticsChart data={data} />}
 

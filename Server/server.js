@@ -3,7 +3,7 @@ import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 import { Server } from 'socket.io';
 import http from 'http';
-import Message from './models/Message.js'; // আপনার তৈরি করা Message মডেলটি ইমপোর্ট করুন
+import Message from './models/Message.js'; 
 
 dotenv.config();
 
@@ -12,56 +12,49 @@ connectDB();
 
 const server = http.createServer(app);
 
-const io = new Server(server, {
-    cors: {
-        origin: [
-            "https://www.mdshimulhossen.top", 
-            "http://localhost:5173",
-            "http://localhost:3000",
-        ],
-        methods: ["GET", "POST"],
-        credentials: true
-    }
-});
+// ... আগের ইমপোর্ট এবং সার্ভার সেটআপ ...
+
+const onlineUsers = new Map(); 
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
-
-    socket.on('join_room', (roomId) => {
-        socket.join(roomId);
-        console.log(`User joined room: ${roomId}`);
-    });
-
-    // মেসেজ সেভ এবং সেন্ড করার লজিক
-    socket.on('send_message', async (data) => {
-        try {
-            const { roomId, sender, message, time,senderId } = data;
-
-            // ১. ডাটাবেসে মেসেজটি সেভ করা
-            const newMessage = new Message({
-                roomId: roomId,
-                senderName: sender,
-                senderId:senderId,
-                message: message,
-                time: time
-            });
-            await newMessage.save();
-
-            // ২. রুমে থাকা সবাইকে (পেশেন্ট এবং ডাক্তার) মেসেজটি পাঠানো
-            io.to(roomId).emit('receive_message', data);
-            
-        } catch (error) {
-            console.error("Message saving error:", error);
+    // ১. রেজিস্ট্রেশন
+    socket.on('register_user', (userId) => {
+        if (userId) {
+            onlineUsers.set(userId, socket.id);
+            io.emit('online_users_list', Array.from(onlineUsers.keys()));
+            console.log(`User Registered: ${userId} | Total Online: ${onlineUsers.size}`);
         }
     });
 
+    // ২. রুম জয়েন
+    socket.on('join_room', (roomId) => {
+        socket.join(roomId);
+    });
+
+    // ৩. মেসেজ আদান-প্রদান (যা উপরে দিয়েছি)
+    // socket.on('send_message', ... )
+
+    // ৪. ডিসকানেক্ট
     socket.on('disconnect', () => {
-        console.log('User has disconnected');
+        let disconnectedUserId = null;
+        for (let [userId, socketId] of onlineUsers.entries()) {
+            if (socketId === socket.id) {
+                disconnectedUserId = userId;
+                onlineUsers.delete(userId);
+                break;
+            }
+        }
+        if (disconnectedUserId) {
+            io.emit('online_users_list', Array.from(onlineUsers.keys()));
+        }
+        console.log('A user disconnected');
     });
 });
 
+// ... পোর্ট এবং সার্ভার লিসেন ...
+
 const PORT = process.env.PORT || 5001;
-server.listen(PORT,'0.0.0.0', () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 });
 

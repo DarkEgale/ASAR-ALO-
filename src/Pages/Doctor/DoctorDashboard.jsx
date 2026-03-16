@@ -49,6 +49,7 @@ const DoctorDashboard = () => {
         console.log(doctorData)
         console.log(doctor)
     }
+    console.log('Doctor is',doctor)
 
 
     const fetchAppointments = async () => {
@@ -131,6 +132,8 @@ const DoctorDashboard = () => {
     const pendingCount = appointments.filter(item => item.status === 'pending').length;
     const completedCount = appointments.filter(item => item.status === 'completed').length;
     const confirmCount = appointments.filter(item => item.status === 'confirmed').length;
+
+    
 
     return (
         <div className="doctor-dashboard-container">
@@ -228,11 +231,14 @@ const DoctorDashboard = () => {
                                                         Write Prescription
                                                     </button>
                                                     <button onClick={() => setToogle(toogle===item._id ? null : item._id)}><MessageCircle size={16} style={{background:"blue",padding:"5px"}} /></button>
-                                                    {toogle === item._id && <ChatComponent roomId={item._id} user={user} isopen={()=>setToogle(null)}/>}
+                                                    {toogle === item._id && <ChatComponent roomId={item._id} user={doctor} isopen={()=>setToogle(null)}targetUserId={item.userId}/>}
+                                                        {console.log('room',item._id)}
+                                                        {console.log('user......',user.id)}
                                                 </td>
                                             </tr>
                                         ))
                                     ) : (
+
                                         <tr><td colSpan="6" className="no-data">No data found.</td></tr>
                                     )}
                                 </tbody>

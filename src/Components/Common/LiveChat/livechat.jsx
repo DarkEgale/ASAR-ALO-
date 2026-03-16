@@ -5,7 +5,7 @@ import './livechat.scss';
 
 const socket = io("https://asar-alo.onrender.com");
 
-const ChatComponent = ({ roomId, user, onClose }) => {
+const ChatComponent = ({ roomId, user, isopen }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const scrollRef = useRef(null);
@@ -72,7 +72,7 @@ const ChatComponent = ({ roomId, user, onClose }) => {
             <p>Online | Room: {roomId}</p>
           </div>
         </div>
-        <button onClick={onClose} className="close-btn">
+        <button onClick={isopen} className="close-btn">
           <X size={20} />
         </button>
       </div>

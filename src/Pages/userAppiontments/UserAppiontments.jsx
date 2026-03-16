@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, Clock, User, DollarSign, ArrowLeft, MoreVertical, MessageCircle, XCircle, Download } from 'lucide-react';
+import ChatComponent from '../../Components/Common/LiveChat/livechat';
 import './UserAppointments.scss';
 
 const MyAppointments = () => {
@@ -9,10 +10,13 @@ const MyAppointments = () => {
     const [appointments, setAppointments] = useState([]);
     const [prescriptions, setPrescriptions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const[user,setUser]=useState(null)
+    const [toogle,setToogle]=useState(false)
 
     useEffect(() => {
         fetchAppointments();
         fetchPrescriptions();
+        fetchUser()
     }, []);
 
     const fetchAppointments = async () => {
@@ -29,6 +33,24 @@ const MyAppointments = () => {
             console.error('Error fetching appointments:', error);
         }
     };
+
+        const fetchUser=async()=>{
+        const res=await fetch('https://asar-alo.onrender.com/api/auth/my',{
+            method:"GET",
+            headers:{
+                'content-type':'application/json',
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
+            }
+
+        })
+        if(!res.ok){
+            throw new Error("Unable to connect Server");
+            
+        }
+        const userData=await res.json()
+        setUser(userData.user)
+
+    }
 
     const fetchPrescriptions = async () => {
         try {
@@ -148,13 +170,15 @@ const MyAppointments = () => {
                                     {app.status === 'pending' && (
                                         <>
                                             <button className="cancel-btn"><XCircle size={16} /> Cancel</button>
-                                            <button className="chat-btn"><MessageCircle size={16} /> Chat</button>
+                                            <button className="chat-btn"onClick={() => setToogle(toogle===app._id ? null : app._id)}><MessageCircle size={16} /> Chat</button>
+                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user}/>}
                                         </>
                                     )}
                                     {app.status === 'confirm' && (
                                         <>
                                             <button className="cancel-btn"><XCircle size={16} /> Cancel</button>
-                                            <button className="chat-btn"><MessageCircle size={16} /> Chat</button>
+                                            <button className="chat-btn"onClick={() => setToogle(toogle===app._id ? null : app._id)}><MessageCircle size={16} /> Chat</button>
+                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user}/>}
                                         </>
                                     )}
                                     {app.status === 'complete' && prescription && (

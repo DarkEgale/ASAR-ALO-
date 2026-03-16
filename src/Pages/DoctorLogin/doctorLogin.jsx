@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useAuth } from "../../Context/authContext";
 import { useNavigate } from "react-router-dom";
 import { Stethoscope, LogIn, Loader2, LogOut} from "lucide-react";
@@ -10,8 +10,9 @@ const DoctorLogin = () => {
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const { doctorSignIn } = useAuth();
+    const { doctorSignIn,user} = useAuth();
     const navigate = useNavigate();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +33,8 @@ const DoctorLogin = () => {
             setIsSubmitting(false);
         }
     };
+
+
 
     return (
         <div className="doctor-login-page">

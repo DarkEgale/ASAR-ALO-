@@ -124,7 +124,7 @@ export default function AdminDashboard() {
                 </header>
 
                 <StatCards data={data} activeTab={activeTab} />
-                <DoctorRegistration activeTab={activeTab}/>
+                
 
                 {activeTab === 'appointments' && <AnalyticsChart data={data} />}
 
@@ -145,11 +145,15 @@ export default function AdminDashboard() {
                 <DataTable 
                     data={filteredData} 
                     activeTab={activeTab} 
-                    loading={loading} 
+                    loading={loading}
+                    addnew={()=>setIsDoctorModalOpen(true)} 
                     onEdit={(item) => {setSelectedItem({...item}); setIsModalOpen(true);}}
                     onDelete={handleDelete}
                 />
+                
             </main>
+
+            
 
             {/* --- ADD DOCTOR MODAL --- */}
             {isDoctorModalOpen && (
@@ -228,7 +232,9 @@ export default function AdminDashboard() {
                                                 <option value="user">User</option>
                                                 <option value="admin">Admin</option>
                                             </>
-                                        )}
+                                        )
+                                        
+                                        }
                                     </select>
                                 </div>
                             )}

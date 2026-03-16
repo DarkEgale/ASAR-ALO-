@@ -24,7 +24,7 @@ export default function DoctorRegistration(){
         
         console.log(doctorData);
         const fecth=async()=>{
-        const api= await fetch('https://asar-alo.onrender.com/api/auth/doctors/register', {
+        const api= await fetch('https://asar-alo.onrender.com/api/admin/auth/doctor/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

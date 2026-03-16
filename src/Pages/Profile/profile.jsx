@@ -40,7 +40,7 @@ const Profile = () => {
                 phone: data.phone || ""
             });
             if (data.image) {
-                setPreviewUrl(`https://asar-alo.onrender.com${data.image}`);
+                setPreviewUrl(`https://asar-alo.onrender.com${data.image}`||<User/>);
             }
             setUser(data);
         } catch (error) {
@@ -89,7 +89,7 @@ const Profile = () => {
             if (res.ok) {
                 setUser(result.user);
                 if (result.user.image) {
-                    setPreviewUrl(`https://asar-alo.onrender.com${result.user.image}`);
+                    setPreviewUrl(`https://asar-alo.onrender.com${result.user.image}`||<User/>);
                 }
                 setMessage({ type: "success", text: "Profile updated successfully!" });
             } else {

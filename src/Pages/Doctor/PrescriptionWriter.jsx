@@ -113,7 +113,7 @@ const PrescriptionWriter = () => {
                 <div className="title-section">
                     <HeartPulse className="icon pulse" color="#e74c3c" />
                     <div>
-                        <h1>Asar Alo Digital Prescription</h1>
+                        <h1>Health Sync Digital Prescription</h1>
                         <p>Branded Digital Healthcare Documents</p>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ const PrescriptionWriter = () => {
                                     </div>
                                 )}
                                 <div>
-                                    <h1 style={{ margin: 0, fontSize: '28px', fontWeight: '900', letterSpacing: '-1px' }}>ASAR ALO</h1>
+                                    <h1 style={{ margin: 0, fontSize: '28px', fontWeight: '900', letterSpacing: '-1px' }}>Health Sync</h1>
                                     <div style={{ fontSize: '18px', fontWeight: '700', marginTop: '2px' }}>
                                         Dr. {selectedAppointment?.doctorId?.name || "Specialist"}
                                     </div>
@@ -217,9 +217,9 @@ const PrescriptionWriter = () => {
                                 </div>
                             </div>
                             <div style={{ textAlign: 'right', fontSize: '12px', lineHeight: '1.6' }}>
-                                <p style={{ margin: 0 }}><strong>Hotline:</strong> +880 1700 000000</p>
-                                <p style={{ margin: 0 }}><strong>Web:</strong> asaralo.com</p>
-                                <p style={{ margin: 0 }}>Dhaka, Bangladesh</p>
+                                <p style={{ margin: 0 }}><strong>Hotline:</strong> +880 17xxxxxxxxx</p>
+                                <p style={{ margin: 0 }}><strong>Web:</strong> mdshimulhossen.top</p>
+                                <p style={{ margin: 0 }}>Natore,Sadar</p>
                             </div>
                         </div>
 
@@ -311,7 +311,7 @@ const PrescriptionWriter = () => {
 
                         {/* --- Footer Watermark --- */}
                         <div style={{ position: 'absolute', bottom: '0', width: '100%', backgroundColor: '#f8f9fa', padding: '12px 50px', fontSize: '10px', color: '#b2bec3', textAlign: 'center', borderTop: '1px solid #dfe6e9' }}>
-                            Electronic Document: No manual signature required. Verified on Asar Alo Medical Network.
+                            Electronic Document: No manual signature required. Verified on Health Sync Medical Network.
                         </div>
                     </div>
                 </section>

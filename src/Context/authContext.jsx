@@ -9,12 +9,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [doctor,setDoctor]=useState(null)
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             try {
                 const decoded = jwtDecode(token);
+                
                 setUser(decoded);
             } catch (error) {
                 console.error("Token Decode Error:", error);
@@ -62,10 +64,10 @@ const Register = async (formData) => {
         const data = await res.json();
 
         if (res.ok) {
-            // সফল হলে শুধু success পাঠাবে
+
             return { success: true };
         } else {
-            // ৪. ব্যাকএন্ড থেকে আসা এরর (যেমন: User already exists) রিটার্ন করবে
+
             return { success: false, message: data.message || "Registration failed" };
         }
     } catch (error) {

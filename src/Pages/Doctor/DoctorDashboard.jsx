@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Context/authContext';
 import DoctorSidebar from '../../Components/Common/DoctorSideBar/DoctorSidebar';
-import { Users, Clock, CheckCircle, BadgeCheck, Search, Calendar, TrendingUp } from 'lucide-react';
+import { Users, Clock, CheckCircle, BadgeCheck, Search, Calendar, TrendingUp,MessageCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ChatComponent from '../../Components/Common/LiveChat/livechat';
 
@@ -13,6 +13,7 @@ const DoctorDashboard = () => {
     const { user } = useAuth();
     const [appointments, setAppiontments] = useState([]);
     const [doctor,setdoctor]=useState(null)
+    const [toogle,setToogle]=useState(false)
     
     // Filtering States
     const [searchTerm, setSearchTerm] = useState('');
@@ -226,6 +227,8 @@ const DoctorDashboard = () => {
                                                     >
                                                         Write Prescription
                                                     </button>
+                                                    <button onClick={() => setToogle(toogle===item._id ? null : item._id)}><MessageCircle size={16} /></button>
+                                                    {toogle === item._id && <ChatComponent roomId={item._id} user={user} isopen={()=>setToogle(null)}/>}
                                                 </td>
                                             </tr>
                                         ))
@@ -278,7 +281,6 @@ const DoctorDashboard = () => {
                     </section>
                 </div>
             </main>
-            <ChatComponent roomId={'1234'} user={doctor}/>
         </div>
     );
 };

@@ -9,9 +9,9 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
-    const {user}=useAuth()
+    const {user,doctor}=useAuth()
 
-    // Scroll effect logic
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 50) setScrolled(true);
@@ -19,12 +19,12 @@ const Navbar = () => {
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+        
     }, []);
-
     return (
         <nav className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
             <div className="navbar-inner">
-                {/* Brand Logo */}
+
                 <div className="nav-logo" onClick={() => navigate('/')}>
                     <div className="logo-box">
                         <img 
@@ -36,7 +36,7 @@ const Navbar = () => {
                     <h2>HealthSync</h2>
                 </div>
 
-                {/* Desktop Links */}
+
                 <div className="nav-links">
                     <NavLink to="/" className="link">Home</NavLink>
                     <NavLink to="/find-doctors" className="link">Find Doctors</NavLink>
@@ -44,17 +44,17 @@ const Navbar = () => {
                     <NavLink to="/contact" className="link">Contact</NavLink>
                 </div>
 
-                {/* Action Buttons */}
+
                 <div className="nav-actions">
-                    <button className="btn-login secondary" onClick={() => navigate('/doctor-login')}>
-                        Doctor Portal
+                    <button className="btn-login secondary" onClick={() => user?.doctorId?navigate('/doctor-dashboard'):navigate('/doctor-login')}>
+                        {user?.doctorId?"Doctor Dashboard":"Doctor portal"}
                     </button>
-                    <button className="btn-login primary" onClick={() => user?navigate('user-dashboard'):navigate('/login')}>
-                        {user?"Dashboard":"Sing In"}
+                    <button className="btn-login primary" onClick={() => user&&user.role==='user'?navigate('user-dashboard'):navigate('/login')}>
+                        {user&&user.role==="user"?"Dashboard":"Sing In"}
                     </button>
                 </div>
 
-                {/* Mobile Menu Icon */}
+
                 <div className="mobile-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                     {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </div>
@@ -70,10 +70,10 @@ const Navbar = () => {
         
         
         <div className="mobile-nav-actions">
-            <button className="btn-login secondary" onClick={() => { navigate('/doctor-login'); setIsMobileMenuOpen(false); }}>
+            <button className="btn-login secondary"style={{height:"35px"}} onClick={() => { navigate('/doctor-login'); setIsMobileMenuOpen(false); }}>
                 Doctor Portal
             </button>
-            <button className="btn-login primary" onClick={() => { user?navigate('/user-dashboard'):navigate('/login'); setIsMobileMenuOpen(false); }}>
+            <button className="btn-login primary"style={{height:"35px"}} onClick={() => { user?navigate('/user-dashboard'):navigate('/login'); setIsMobileMenuOpen(false); }}>
                 {user?"Dashboard":"Sing In"}
             </button>
         </div>

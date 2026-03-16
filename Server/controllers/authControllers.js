@@ -102,7 +102,7 @@ export const DoctorLogin=async (req,res) => {
 
         const{email,password}=req.body;
         console.log('login Attmp with',email)
-    const doctor=await Doctor.findOne({email})
+    const doctor=await Doctor.findOne({email:email})
     if(!doctor){
         return res.status(401).json({message:"Wrong email or password"})
     }

@@ -1,8 +1,8 @@
-import { Trash2, UserCog, Clock } from "lucide-react";
+import { Trash2, UserCog, Clock ,UserPlus} from "lucide-react";
 import '../../../Pages/AdminPanel/Dasboard/Dashboard.scss'
 
 
-export default function DataTable({ data, activeTab, loading, onEdit, onDelete }) {
+export default function DataTable({ data, activeTab, loading, onEdit, onDelete,addnew }) {
     if (loading) return <div className="loader">Loading {activeTab}...</div>;
 
     return (
@@ -43,6 +43,7 @@ export default function DataTable({ data, activeTab, loading, onEdit, onDelete }
                             </td>
                             <td>
                                 <div className="action-btns">
+                                    <button className="edit-btn" onClick={addnew}><UserPlus size={20}/></button>
                                     <button className="edit-btn" onClick={() => onEdit(item)}><UserCog size={16} /></button>
                                     <button className="delete-btn" onClick={() => onDelete(item._id)}><Trash2 size={16} /></button>
                                 </div>

@@ -12,7 +12,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
         <aside className="sidebar">
             <div className="logo-section">
                 <Activity className="logo-icon" size={28} />
-                <span>AsarAlo <small>v3.0</small></span>
+                <span>Health Sync <small>v1.0.0</small></span>
             </div>
             
             <div className="sidebar-scroll">
@@ -36,6 +36,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
                     >
                         <Calendar size={18} /> <span>Appointments</span>
                     </div>
+
                 </div>
             </div>
 

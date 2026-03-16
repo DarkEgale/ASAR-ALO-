@@ -6,17 +6,19 @@ const messageSchema = new mongoose.Schema({
         required: true,
         index: true 
     },
-    senderName: {
-        type: String,
-        required: true
-    },
     senderId: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User' 
+        ref: 'User',
+        required: true
+    },
+    senderName: { 
+        type: String,
+        required: true
     },
     message: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     time: {
         type: String 
@@ -24,6 +26,9 @@ const messageSchema = new mongoose.Schema({
 }, { 
     timestamps: true 
 });
+
+
+messageSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
 
 const Message = mongoose.model('Message', messageSchema);
 

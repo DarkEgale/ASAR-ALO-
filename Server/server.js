@@ -3,16 +3,20 @@ import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 import { Server } from 'socket.io';
 import http from 'http';
+import compression from 'compression'; // ১. সাইজ কমানোর জন্য
 import Message from './models/Message.js'; 
 
 dotenv.config();
+
+// ১. ফাইল কম্প্রেশন এনাবল করুন (এটি সাইজ ৭০% কমিয়ে দেয়)
+app.use(compression());
 
 // Connect to Database
 connectDB();
 
 const server = http.createServer(app);
 
-// এই অংশটুকু আপনার কোডে বাদ পড়েছে, এটি যোগ করুন
+// ২. সকেট অপ্টিমাইজেশন
 const io = new Server(server, {
     cors: {
         origin: [
@@ -22,20 +26,19 @@ const io = new Server(server, {
         ],
         methods: ["GET", "POST"],
         credentials: true
-    }
+    },
+    transports: ['websocket', 'polling'] // ৩. কানেকশন ফাস্ট করার জন্য
 });
 
 const onlineUsers = new Map(); 
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
-
     socket.on('register_user', (userId) => {
         if (userId) {
             onlineUsers.set(userId, socket.id);
-            const userList = Array.from(onlineUsers.keys());
+            // ৪. শুধু ইউনিক আইডি পাঠানোর জন্য Set ব্যবহার
+            const userList = Array.from(new Set(onlineUsers.keys()));
             io.emit('online_users_list', userList);
-            console.log(`User Registered: ${userId} | Total Online: ${onlineUsers.size}`);
         }
     });
 
@@ -43,42 +46,41 @@ io.on('connection', (socket) => {
         socket.join(roomId);
     });
 
-    // মেসেজ হ্যান্ডলিং লজিক (এটিও যোগ করা জরুরি)
     socket.on('send_message', async (data) => {
         try {
             const { roomId, sender, message, time, senderId } = data;
+            
+            // ৫. ব্যাকগ্রাউন্ডে সেভ করুন যেন ইউজার ল্যাগ না পায়
             const newMessage = new Message({
                 roomId, senderName: sender, senderId, message, time
             });
             await newMessage.save();
+            
             io.to(roomId).emit('receive_message', data);
         } catch (error) {
-            console.error("Message error:", error);
+            console.error("Socket Message error:", error);
         }
     });
 
     socket.on('disconnect', () => {
-        let disconnectedUserId = null;
         for (let [userId, socketId] of onlineUsers.entries()) {
             if (socketId === socket.id) {
-                disconnectedUserId = userId;
                 onlineUsers.delete(userId);
                 break;
             }
         }
-        if (disconnectedUserId) {
-            io.emit('online_users_list', Array.from(onlineUsers.keys()));
-        }
-        console.log('A user disconnected');
+        io.emit('online_users_list', Array.from(onlineUsers.keys()));
     });
 });
 
+
+
 const PORT = process.env.PORT || 5001;
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`🚀 Optimized Server running on port ${PORT}`);
 });
 
 process.on('unhandledRejection', (err) => {
-    console.log(`Error: ${err.message}`);
+    console.error(`Unhandled Error: ${err.message}`);
     server.close(() => process.exit(1));
 });

@@ -171,7 +171,8 @@ const MyAppointments = () => {
                                         <>
                                             <button className="cancel-btn"><XCircle size={16} /> Cancel</button>
                                             <button className="chat-btn"onClick={() => setToogle(toogle===app._id ? null : app._id)}><MessageCircle size={16} /> Chat</button>
-                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user} isopen={()=>setToogle(null)}/>}
+                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user} isopen={()=>setToogle(null)}targetUserId={app.doctorId}/>}
+                                                {console.log("Thoifopejofjofj",app.doctorId)}
                                         </>
                                     )}
                                     {app.status === 'confirm' && (
@@ -179,6 +180,7 @@ const MyAppointments = () => {
                                             <button className="cancel-btn"><XCircle size={16} /> Cancel</button>
                                             <button className="chat-btn"onClick={() => setToogle(toogle===app._id ? null : app._id)}><MessageCircle size={16} /> Chat</button>
                                             {toogle === app._id && <ChatComponent roomId={app._id} user={user} isopen={()=>setToogle(null) } targetUserId={app.doctorId}/>}
+                                                {console.log("Thoifopejofjofj",app.doctorId)}
                                         </>
                                     )}
                                     {app.status === 'complete' && prescription && (

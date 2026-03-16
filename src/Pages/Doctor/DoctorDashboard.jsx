@@ -227,7 +227,7 @@ const DoctorDashboard = () => {
                                                     >
                                                         Write Prescription
                                                     </button>
-                                                    <button onClick={() => setToogle(toogle===item._id ? null : item._id)}><MessageCircle size={16} /></button>
+                                                    <button onClick={() => setToogle(toogle===item._id ? null : item._id)}><MessageCircle size={16} style={{background:"blue",padding:"5px"}} /></button>
                                                     {toogle === item._id && <ChatComponent roomId={item._id} user={user} isopen={()=>setToogle(null)}/>}
                                                 </td>
                                             </tr>

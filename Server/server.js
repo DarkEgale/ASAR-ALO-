@@ -35,12 +35,13 @@ io.on('connection', (socket) => {
     // মেসেজ সেভ এবং সেন্ড করার লজিক
     socket.on('send_message', async (data) => {
         try {
-            const { roomId, sender, message, time } = data;
+            const { roomId, sender, message, time,senderId } = data;
 
             // ১. ডাটাবেসে মেসেজটি সেভ করা
             const newMessage = new Message({
                 roomId: roomId,
                 senderName: sender,
+                senderId:senderId,
                 message: message,
                 time: time
             });

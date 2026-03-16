@@ -171,14 +171,14 @@ const MyAppointments = () => {
                                         <>
                                             <button className="cancel-btn"><XCircle size={16} /> Cancel</button>
                                             <button className="chat-btn"onClick={() => setToogle(toogle===app._id ? null : app._id)}><MessageCircle size={16} /> Chat</button>
-                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user}/>}
+                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user} isopen={()=>setToogle(null)}/>}
                                         </>
                                     )}
                                     {app.status === 'confirm' && (
                                         <>
                                             <button className="cancel-btn"><XCircle size={16} /> Cancel</button>
                                             <button className="chat-btn"onClick={() => setToogle(toogle===app._id ? null : app._id)}><MessageCircle size={16} /> Chat</button>
-                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user}/>}
+                                            {toogle === app._id && <ChatComponent roomId={app._id} user={user} isopen={()=>setToogle(null)}/>}
                                         </>
                                     )}
                                     {app.status === 'complete' && prescription && (

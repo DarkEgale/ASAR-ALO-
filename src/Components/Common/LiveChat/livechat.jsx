@@ -29,6 +29,8 @@ const ChatComponent = ({ roomId, user, isopen }) => {
       }
     };
 
+    console.log('The User',user)
+
     fetchHistory();
     socket.emit("join_room", roomId);
 

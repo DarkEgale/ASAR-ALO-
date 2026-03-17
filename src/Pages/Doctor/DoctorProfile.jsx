@@ -4,7 +4,6 @@ import { useAuth } from "../../Context/authContext";
 import "./doctorProfile.scss";
 
 const DoctorProfile = () => {
-    const { setUser } = useAuth();
     const [loading, setLoading] = useState(false);
     const [fetching, setFetching] = useState(true);
     const [message, setMessage] = useState({ type: "", text: "" });
@@ -22,10 +21,9 @@ const DoctorProfile = () => {
     // ১. ডক্টর ডাটা ফেচ করা
     const fetchDoctor = async () => {
         try {
-            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my', {
+            const res = await fetch('http://localhost:5001/api/auth/doctors/my', {
                 method: "GET",
                 headers: {
-                    'content-type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
@@ -44,13 +42,15 @@ const DoctorProfile = () => {
                     availableTime: data.availableTime || ""
                 });
                 
-                if (data.image) {
-                    // টাইমস্ট্যাম্প যোগ করা হয়েছে যাতে ব্রাউজার ক্যাশ না করে
-                    setPreviewUrl(`https://asar-alo.onrender.com${data.image}?t=${Date.now()}`);
+                // ইমেজ পাথ চেক এবং সেট
+                if (data.image && !data.image.includes('undefined')) {
+                    // যদি ডাটাবেজে পাথ /uploads/ দিয়ে শুরু হয়, তবে ডাবল স্ল্যাশ এড়াতে format করা
+                    const imagePath = data.image.startsWith('/') ? data.image : `/${data.image}`;
+                    setPreviewUrl(`http://localhost:5001${imagePath}`);
                 }
             }
         } catch (error) {
-            console.error(error.message);
+            console.error("Fetch Error:", error.message);
         } finally {
             setFetching(false);
         }
@@ -64,7 +64,7 @@ const DoctorProfile = () => {
         const file = e.target.files[0];
         if (file) {
             setSelectedImage(file);
-            setPreviewUrl(URL.createObjectURL(file));
+            setPreviewUrl(URL.createObjectURL(file)); // লোকাল প্রিভিউ
         }
     };
 
@@ -81,32 +81,32 @@ const DoctorProfile = () => {
         data.append("availableTime", formData.availableTime);
         
         if (selectedImage) {
-            // গুরুত্বপূর্ণ: এখানে 'image' ব্যবহার করুন, কারণ ইউজারের ক্ষেত্রেও এটাই কাজ করেছে
-            data.append("image", selectedImage);
+            // গুরুত্বপূর্ণ: ব্যাকএন্ড রাউটে upload.single('profileImage') থাকলে এটাই দিন
+            data.append("profileImage", selectedImage);
         }
 
         try {
-            const res = await fetch("https://asar-alo.onrender.com/api/auth/doctors/update-profile", {
+            const res = await fetch("http://localhost:5001/api/auth/doctors/update-profile", {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
-                body: data
+                body: data // FormData পাঠানোর সময় Content-Type হেডার দেওয়ার দরকার নেই
             });
 
             const result = await res.json();
 
             if (res.ok) {
-                // আপডেট সাকসেস হলে নতুন ইমেজ প্রিভিউ সেট করা
-                if (result.doctor && result.doctor.image) {
-                    setPreviewUrl(`https://asar-alo.onrender.com${result.doctor.image}?t=${Date.now()}`);
+                if (result.doctor && result.doctor.image && !result.doctor.image.includes('undefined')) {
+                    const imagePath = result.doctor.image.startsWith('/') ? result.doctor.image : `/${result.doctor.image}`;
+                    setPreviewUrl(`http://localhost:5001${imagePath}?t=${Date.now()}`);
                 }
                 setMessage({ type: "success", text: "Profile updated successfully!" });
             } else {
                 setMessage({ type: "error", text: result.message || "Update failed" });
             }
         } catch (error) {
-            console.error(error);
+            console.error("Update Error:", error);
             setMessage({ type: "error", text: "Server error occurred" });
         } finally {
             setLoading(false);
@@ -129,11 +129,19 @@ const DoctorProfile = () => {
                             <img 
                                 src={previewUrl} 
                                 alt="Doctor Profile" 
-                                onError={(e) => e.target.src = "/default-avatar.png"} // ইমেজ লোড না হলে ডিফল্ট
+                                onError={(e) => {
+                                    e.target.onerror = null; 
+                                    e.target.src = "/default-avatar.png";
+                                }} 
                             />
-                            <label className="camera-icon">
+                            <label className="camera-icon" style={{ cursor: 'pointer' }}>
                                 <Camera size={18} />
-                                <input type="file" hidden onChange={handleImageChange} accept="image/*" />
+                                <input 
+                                    type="file" 
+                                    hidden 
+                                    onChange={handleImageChange} 
+                                    accept="image/*" 
+                                />
                             </label>
                         </div>
                     </div>
@@ -154,9 +162,9 @@ const DoctorProfile = () => {
                             </div>
                         </div>
 
-                        <div className="input-group disabled">
+                        <div className="input-group">
                             <label>Email Address</label>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper disabled">
                                 <Mail size={18} className="icon" />
                                 <input type="email" value={formData.email} disabled />
                             </div>

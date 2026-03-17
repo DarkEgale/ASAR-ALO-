@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Camera, Mail, User, Phone, Save, Loader, ShieldCheck } from "lucide-react";
-import { useAuth } from "../../Context/authContext"; // আপনার পাথ অনুযায়ী
+import { useAuth } from "../../Context/authContext"; 
 import "./doctorProfile.scss";
 
 const DoctorProfile = () => {
@@ -19,7 +19,7 @@ const DoctorProfile = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("/default-avatar.png");
 
-    // Fetch Doctor Profile
+    // ১. ডক্টর ডাটা ফেচ করা
     const fetchDoctor = async () => {
         try {
             const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my', {
@@ -35,16 +35,19 @@ const DoctorProfile = () => {
             const doctorData = await res.json();
             const data = doctorData.doctor;
 
-            // Set form data
-            setFormData({
-                name: data.name,
-                email: data.email,
-                phone: data.phone || "",
-                specialization: data.specialization || "",
-                availableTime: data.availableTime || ""
-            });
-            if (data.image) {
-                setPreviewUrl(`https://asar-alo.onrender.com${data.image}`);
+            if (data) {
+                setFormData({
+                    name: data.name || "",
+                    email: data.email || "",
+                    phone: data.phone || "",
+                    specialization: data.specialization || "",
+                    availableTime: data.availableTime || ""
+                });
+                
+                if (data.image) {
+                    // টাইমস্ট্যাম্প যোগ করা হয়েছে যাতে ব্রাউজার ক্যাশ না করে
+                    setPreviewUrl(`https://asar-alo.onrender.com${data.image}?t=${Date.now()}`);
+                }
             }
         } catch (error) {
             console.error(error.message);
@@ -57,7 +60,6 @@ const DoctorProfile = () => {
         fetchDoctor();
     }, []);
 
-    // Handle Image Change
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -66,7 +68,7 @@ const DoctorProfile = () => {
         }
     };
 
-    // Update Profile
+    // ২. প্রোফাইল আপডেট করা
     const handleUpdate = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -77,8 +79,10 @@ const DoctorProfile = () => {
         data.append("phone", formData.phone);
         data.append("specialization", formData.specialization);
         data.append("availableTime", formData.availableTime);
+        
         if (selectedImage) {
-            data.append("profileImage", selectedImage);
+            // গুরুত্বপূর্ণ: এখানে 'image' ব্যবহার করুন, কারণ ইউজারের ক্ষেত্রেও এটাই কাজ করেছে
+            data.append("image", selectedImage);
         }
 
         try {
@@ -91,15 +95,18 @@ const DoctorProfile = () => {
             });
 
             const result = await res.json();
+
             if (res.ok) {
-                if (result.doctor.image) {
-                    setPreviewUrl(`https://asar-alo.onrender.com${result.doctor.image}`);
+                // আপডেট সাকসেস হলে নতুন ইমেজ প্রিভিউ সেট করা
+                if (result.doctor && result.doctor.image) {
+                    setPreviewUrl(`https://asar-alo.onrender.com${result.doctor.image}?t=${Date.now()}`);
                 }
                 setMessage({ type: "success", text: "Profile updated successfully!" });
             } else {
                 setMessage({ type: "error", text: result.message || "Update failed" });
             }
         } catch (error) {
+            console.error(error);
             setMessage({ type: "error", text: "Server error occurred" });
         } finally {
             setLoading(false);
@@ -117,10 +124,13 @@ const DoctorProfile = () => {
                 </div>
 
                 <form onSubmit={handleUpdate} className="profile-form">
-                    {/* Avatar Upload Section */}
                     <div className="avatar-section">
                         <div className="image-wrapper">
-                            <img src={previewUrl} alt="Doctor Profile" />
+                            <img 
+                                src={previewUrl} 
+                                alt="Doctor Profile" 
+                                onError={(e) => e.target.src = "/default-avatar.png"} // ইমেজ লোড না হলে ডিফল্ট
+                            />
                             <label className="camera-icon">
                                 <Camera size={18} />
                                 <input type="file" hidden onChange={handleImageChange} accept="image/*" />
@@ -150,7 +160,6 @@ const DoctorProfile = () => {
                                 <Mail size={18} className="icon" />
                                 <input type="email" value={formData.email} disabled />
                             </div>
-                            <small>Email address is linked to your identity.</small>
                         </div>
 
                         <div className="input-group">
@@ -159,7 +168,6 @@ const DoctorProfile = () => {
                                 <Phone size={18} className="icon" />
                                 <input
                                     type="text"
-                                    placeholder="+880 1XXX XXXXXX"
                                     value={formData.phone}
                                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                                 />
@@ -183,6 +191,7 @@ const DoctorProfile = () => {
                             <div className="input-wrapper">
                                 <input
                                     type="text"
+                                    placeholder="e.g. 10:00 AM - 02:00 PM"
                                     value={formData.availableTime}
                                     onChange={(e) => setFormData({...formData, availableTime: e.target.value})}
                                 />

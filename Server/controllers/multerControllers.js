@@ -1,4 +1,5 @@
-import User from '../models/User.js'; // এটি যোগ করা হয়েছে
+import User from '../models/User.js';
+import Doctor from '../models/Doctors.js'; 
 import path from 'path';
 import fs from 'fs';
 import sharp from 'sharp';
@@ -8,36 +9,44 @@ const __dirname = path.resolve();
 const updateProfile = async (req, res) => {
     try {
         let updateData = { ...req.body };
+        // আপনার মিডলওয়্যার থেকে যদি role আসে, তবে সেটা দিয়ে চেক করা সহজ
+        const isDoctor = req.user.role === 'doctor' || req.baseUrl.includes('doctors'); 
 
         if (req.file) {
-            const fileName = `profile-${req.user.id}-${Date.now()}.webp`;
+            // ফাইলের নাম ডক্টর বা ইউজারের ভিত্তিতে আলাদা করা
+            const prefix = isDoctor ? 'doctor' : 'profile';
+            const fileName = `${prefix}-${req.user.id}-${Date.now()}.webp`;
             
-            // সঠিক পাথ সেট করা
             const uploadDir = path.join(__dirname, 'public', 'uploads');
             const outputPath = path.join(uploadDir, fileName);
 
-            // ফোল্ডার না থাকলে তৈরি করা
             if (!fs.existsSync(uploadDir)) {
                 fs.mkdirSync(uploadDir, { recursive: true });
             }
 
-            // Sharp দিয়ে ইমেজ প্রসেসিং
             await sharp(req.file.buffer)
                 .resize(500, 500, { fit: 'cover' })
                 .webp({ quality: 80 })
                 .toFile(outputPath);
 
-            // ডাটাবেজের জন্য পাথ সেট করা
             updateData.image = `/uploads/${fileName}`;
         }
 
-        const user = await User.findByIdAndUpdate(req.user.id, updateData, { new: true });
+        // ডাইনামিকভাবে মডেল সিলেক্ট করা
+        const Model = isDoctor ? Doctor : User;
+        const updatedProfile = await Model.findByIdAndUpdate(req.user.id, updateData, { new: true });
         
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found" });
+        if (!updatedProfile) {
+            return res.status(404).json({ success: false, message: "Profile not found" });
         }
 
-        res.status(200).json({ success: true, message: "Profile updated successfully!", user });
+        // ফ্রন্টএন্ডের জন্য ডাইনামিক রেসপন্স
+        const responseKey = isDoctor ? 'doctor' : 'user';
+        res.status(200).json({ 
+            success: true, 
+            message: "Profile updated successfully!", 
+            [responseKey]: updatedProfile 
+        });
 
     } catch (error) {
         console.error("Update Error:", error);
@@ -45,5 +54,4 @@ const updateProfile = async (req, res) => {
     }
 };
 
-// এই এক্সপোর্ট লাইনটি অবশ্যই থাকতে হবে
 export { updateProfile };

@@ -1,5 +1,5 @@
 import User from '../models/User.js';
-import Doctor from '../models/Doctors.js'; 
+import Doctor from '../models/Doctors.js';
 import path from 'path';
 import fs from 'fs';
 import sharp from 'sharp';
@@ -9,11 +9,11 @@ const __dirname = path.resolve();
 const updateProfile = async (req, res) => {
     try {
         let updateData = { ...req.body };
-        // আপনার মিডলওয়্যার থেকে যদি role আসে, তবে সেটা দিয়ে চেক করা সহজ
+        
         const isDoctor = req.user.role === 'doctor' || req.baseUrl.includes('doctors'); 
 
         if (req.file) {
-            // ফাইলের নাম ডক্টর বা ইউজারের ভিত্তিতে আলাদা করা
+            
             const prefix = isDoctor ? 'doctor' : 'profile';
             const fileName = `${prefix}-${req.user.id}-${Date.now()}.webp`;
             

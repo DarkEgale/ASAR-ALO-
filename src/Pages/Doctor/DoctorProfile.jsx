@@ -21,7 +21,7 @@ const DoctorProfile = () => {
     // ১. ডক্টর ডাটা ফেচ করা
     const fetchDoctor = async () => {
         try {
-            const res = await fetch('http://localhost:5001/api/auth/doctors/my', {
+            const res = await fetch('https://asar-alo.onrender.com/api/auth/doctors/my', {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -46,7 +46,7 @@ const DoctorProfile = () => {
                 if (data.image && !data.image.includes('undefined')) {
                     // যদি ডাটাবেজে পাথ /uploads/ দিয়ে শুরু হয়, তবে ডাবল স্ল্যাশ এড়াতে format করা
                     const imagePath = data.image.startsWith('/') ? data.image : `/${data.image}`;
-                    setPreviewUrl(`http://localhost:5001${imagePath}`);
+                    setPreviewUrl(`https://asar-alo.onrender.com${imagePath}`);
                 }
             }
         } catch (error) {
@@ -86,7 +86,7 @@ const DoctorProfile = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:5001/api/auth/doctors/update-profile", {
+            const res = await fetch("https://asar-alo.onrender.com/api/auth/doctors/update-profile", {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -99,7 +99,7 @@ const DoctorProfile = () => {
             if (res.ok) {
                 if (result.doctor && result.doctor.image && !result.doctor.image.includes('undefined')) {
                     const imagePath = result.doctor.image.startsWith('/') ? result.doctor.image : `/${result.doctor.image}`;
-                    setPreviewUrl(`http://localhost:5001${imagePath}?t=${Date.now()}`);
+                    setPreviewUrl(`https://asar-alo.onrender.com${imagePath}?t=${Date.now()}`);
                 }
                 setMessage({ type: "success", text: "Profile updated successfully!" });
             } else {
